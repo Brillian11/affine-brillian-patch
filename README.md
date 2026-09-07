@@ -1,6 +1,10 @@
-﻿# 🧠 AFFiNE Brillian Patch: Personal Second Brain & Integration Hub
+# 🧠 AFFiNE Brillian Patch: Personal Second Brain & Integration Hub
 
 > An advanced, customized distribution of **AFFiNE** engineered as a centralized **Second Brain Hub** with deep integrations across **Paperless-ngx**, **Local LLMs / Ollama (Qwen-Embed)**, **Task Management (Todoist / Kanban)**, **Open-Symbols Iconography**, and an **Apple Liquid Glass Design System**.
+
+<p align="center">
+  <img src="assets/hero-preview.png" alt="AFFiNE Brillian Patch Settings & Extensions Preview" width="100%" style="border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.15);" />
+</p>
 
 ---
 
