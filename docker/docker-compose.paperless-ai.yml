@@ -1,0 +1,84 @@
+﻿version: '3.8'
+
+services:
+  # ---------------------------------------------------------------------------
+  # Paperless-ngx: Core Document Archiving & OCR Engine
+  # ---------------------------------------------------------------------------
+  paperless-web:
+    image: ghcr.io/paperless-ngx/paperless-ngx:latest
+    container_name: paperless-web
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      PAPERLESS_REDIS: redis://paperless-redis:6379
+      PAPERLESS_DBHOST: paperless-db
+      PAPERLESS_DBNAME: paperless
+      PAPERLESS_DBUSER: paperless
+      PAPERLESS_DBPASS: ${PAPERLESS_DB_PASS:-paperless_secure_pass}
+      PAPERLESS_URL: https://paperless.yourdomain.com
+      PAPERLESS_SECRET_KEY: ${PAPERLESS_SECRET_KEY:-change_this_secret_key}
+      PAPERLESS_OCR_LANGUAGE: eng+ind
+      PAPERLESS_ENABLE_HTTP_REMOTE_USER: "true"
+      PAPERLESS_CORS_ALLOWED_HOSTS: "https://affine.yourdomain.com,http://localhost:3010,http://localhost:8080"
+    volumes:
+      - /data/paperless/data:/usr/src/paperless/data
+      - /data/paperless/media:/usr/src/paperless/media
+      - /data/paperless/export:/usr/src/paperless/export
+      - /data/paperless/consume:/usr/src/paperless/consume
+    depends_on:
+      - paperless-db
+      - paperless-redis
+
+  paperless-db:
+    image: postgres:15-alpine
+    container_name: paperless-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: paperless
+      POSTGRES_USER: paperless
+      POSTGRES_PASSWORD: ${PAPERLESS_DB_PASS:-paperless_secure_pass}
+    volumes:
+      - /data/paperless/pgdata:/var/lib/postgresql/data
+
+  paperless-redis:
+    image: redis:7-alpine
+    container_name: paperless-redis
+    restart: unless-stopped
+    volumes:
+      - /data/paperless/redisdata:/data
+
+  # ---------------------------------------------------------------------------
+  # Paperless-MCP Server: Model Context Protocol & Vector Search Bridge
+  # ---------------------------------------------------------------------------
+  paperless-mcp:
+    image: node:20-alpine
+    container_name: paperless-mcp
+    restart: unless-stopped
+    ports:
+      - "3001:3001"
+    environment:
+      PORT: 3001
+      PAPERLESS_API_URL: http://paperless-web:8000
+      PAPERLESS_API_TOKEN: ${PAPERLESS_API_TOKEN}
+      OLLAMA_BASE_URL: http://paperless-ollama:11434
+      EMBEDDING_MODEL: qwen-embed
+    working_dir: /app
+    volumes:
+      - /data/paperless-mcp:/app
+    command: ["node", "index.js"]
+    depends_on:
+      - paperless-web
+      - paperless-ollama
+
+  # ---------------------------------------------------------------------------
+  # Ollama: Local Neural Embedding & Vector Engine
+  # ---------------------------------------------------------------------------
+  paperless-ollama:
+    image: ollama/ollama:latest
+    container_name: paperless-ollama
+    restart: unless-stopped
+    ports:
+      - "11434:11434"
+    volumes:
+      - /data/ollama:/root/.ollama

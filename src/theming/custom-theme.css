@@ -1,0 +1,491 @@
+@import './autocorrect-widget.css';
+
+/* Custom Theme Palette Options & Glassmorphism Styling */
+
+:root {
+  --affine-brand-color: #6366f1;
+  --affine-primary-color: #4f46e5;
+  --affine-font-family:
+    -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'SF Pro', 'Helvetica Neue',
+    'Inter', 'Segoe UI', Roboto, sans-serif;
+  --affine-glass-background: rgba(255, 255, 255, 0.75);
+  --affine-glass-border: rgba(226, 232, 240, 0.8);
+}
+
+/* Color Accent Theme Classes */
+[data-accent='indigo'] {
+  --affine-brand-color: #6366f1;
+  --affine-primary-color: #4f46e5;
+}
+
+[data-accent='emerald'] {
+  --affine-brand-color: #10b981;
+  --affine-primary-color: #059669;
+}
+
+[data-accent='amber'] {
+  --affine-brand-color: #f59e0b;
+  --affine-primary-color: #d97706;
+}
+
+[data-accent='crimson'] {
+  --affine-brand-color: #f43f5e;
+  --affine-primary-color: #e11d48;
+}
+
+/* Light Mode Overrides */
+[data-theme='light'] {
+  --affine-background-primary-color: #f8fafc;
+  --affine-glass-background: rgba(255, 255, 255, 0.85);
+}
+
+/* Dark Mode Overrides */
+[data-theme='dark'] {
+  --affine-background-primary-color: #0f172a;
+  --affine-glass-background: rgba(15, 23, 42, 0.85);
+  --affine-glass-border: rgba(51, 65, 85, 0.8);
+}
+
+/* ==========================================================================
+   Liquid Glass Theme (Brillian Patch Edition)
+   ========================================================================== */
+
+html[data-brillian-theme='liquid-glass'] {
+  --affine-brand-color: #0b57d0;
+  --affine-primary-color: #3b82f6;
+  --affine-glass-border: rgba(255, 255, 255, 0.1);
+  --affine-glass-glow: rgba(255, 255, 255, 0.18);
+  --affine-glass-panel-bg: rgba(31, 31, 31, 0.45);
+}
+
+html[data-brillian-theme='liquid-glass'][data-theme='dark'],
+html[data-brillian-theme='liquid-glass'] [data-theme='dark'] {
+  --affine-background-primary-color: #1e1e20;
+  --affine-background-secondary-color: rgba(30, 30, 32, 0.7);
+  --affine-background-tertiary-color: rgba(45, 45, 48, 0.6);
+  --affine-background-overlay-panel-color: rgba(30, 30, 32, 0.82);
+  --affine-v2-layer-background-overlayPanel: rgba(30, 30, 32, 0.82);
+  --affine-v2-layer-background-primary: #1e1e20;
+  --affine-v2-layer-background-secondary: rgba(30, 30, 32, 0.7);
+  --affine-v2-layer-insideBorder-border: rgba(255, 255, 255, 0.12);
+  --affine-glass-background: rgba(22, 22, 24, 0.75);
+  --affine-sidebar-glass: rgba(15, 15, 17, 0.85);
+  --affine-glass-border: rgba(255, 255, 255, 0.06);
+}
+
+html[data-brillian-theme='liquid-glass'][data-theme='light'],
+html[data-brillian-theme='liquid-glass'] [data-theme='light'] {
+  --affine-background-primary-color: #ffffff;
+  --affine-background-secondary-color: rgba(245, 245, 247, 0.8);
+  --affine-background-tertiary-color: rgba(235, 235, 240, 0.7);
+  --affine-background-overlay-panel-color: rgba(255, 255, 255, 0.82);
+  --affine-v2-layer-background-overlayPanel: rgba(255, 255, 255, 0.82);
+  --affine-v2-layer-background-primary: #ffffff;
+  --affine-v2-layer-background-secondary: rgba(245, 245, 247, 0.8);
+  --affine-v2-layer-insideBorder-border: rgba(0, 0, 0, 0.08);
+  --affine-glass-background: rgba(255, 255, 255, 0.85);
+  --affine-sidebar-glass: rgba(238, 238, 242, 0.72);
+  --affine-glass-border: rgba(0, 0, 0, 0.04);
+  --affine-glass-glow: rgba(255, 255, 255, 0.7);
+}
+
+/* Liquid Glass Structural Refraction & Specular Borders */
+[data-radix-portal] [data-state='open'][class*='modalOverlay'],
+.modal-overlay,
+[class*='modalOverlay'],
+[class*='styles_modalOverlay'] {
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  background-color: rgba(0, 0, 0, 0.25) !important;
+}
+
+[role='dialog'],
+[data-testid='setting-modal'],
+[class*='settingSlideBar'] ~ div {
+  background: rgba(255, 255, 255, 0.85) !important;
+  backdrop-filter: blur(36px) saturate(200%) !important;
+  -webkit-backdrop-filter: blur(36px) saturate(200%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.7) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.95) !important;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3) !important;
+  border-radius: 20px !important;
+  overflow: hidden !important;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-theme='dark'] [role='dialog'],
+[data-theme='dark'] [data-testid='setting-modal'] {
+  background: rgba(30, 30, 32, 0.82) !important;
+  backdrop-filter: blur(36px) saturate(200%) !important;
+  -webkit-backdrop-filter: blur(36px) saturate(200%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.24) !important;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45) !important;
+}
+
+[role='dialog'] [class*='settingSlideBar'],
+[data-testid='settings-sidebar'],
+[class*='settingSlideBar'] {
+  background: rgba(245, 245, 247, 0.75) !important;
+  backdrop-filter: blur(30px) saturate(190%) !important;
+  -webkit-backdrop-filter: blur(30px) saturate(190%) !important;
+  border-right: 1px solid rgba(0, 0, 0, 0.08) !important;
+}
+
+[data-theme='dark'] [role='dialog'] [class*='settingSlideBar'],
+[data-theme='dark'] [data-testid='settings-sidebar'],
+[data-theme='dark'] [class*='settingSlideBar'] {
+  background: rgba(22, 22, 24, 0.75) !important;
+  backdrop-filter: blur(30px) saturate(190%) !important;
+  -webkit-backdrop-filter: blur(30px) saturate(190%) !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+.affine-sidebar-container,
+[data-testid='app-sidebar'],
+[data-testid='app-sidebar-wrapper'],
+nav[data-testid='app-sidebar'] {
+  background: var(--affine-sidebar-glass, rgba(238, 238, 242, 0.72)) !important;
+  backdrop-filter: blur(30px) saturate(190%) !important;
+  -webkit-backdrop-filter: blur(30px) saturate(190%) !important;
+  border: none !important;
+  border-right: 1px solid var(--affine-glass-border, rgba(0, 0, 0, 0.04)) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Apple Pill Rounded Floating Toolbars & Format Bar (Liquid Glass) */
+html[data-brillian-theme='liquid-glass'] [data-floating-toolbar],
+html[data-brillian-theme='liquid-glass'] editor-toolbar,
+html[data-brillian-theme='liquid-glass'] editor-toolbar > div,
+html[data-brillian-theme='liquid-glass'] affine-format-bar-widget,
+html[data-brillian-theme='liquid-glass'] affine-slash-menu-widget,
+html[data-brillian-theme='liquid-glass'] .affine-format-bar,
+html[data-brillian-theme='liquid-glass'] .editor-toolbar,
+html[data-brillian-theme='liquid-glass'] [class*='toolbarContainer'],
+html[data-brillian-theme='liquid-glass'] [class*='formatBar'] {
+  background: rgba(255, 255, 255, 0.78) !important;
+  backdrop-filter: blur(40px) saturate(210%) !important;
+  -webkit-backdrop-filter: blur(40px) saturate(210%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.75) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.95) !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+  border-radius: 9999px !important;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.12),
+              0 2px 6px rgba(0, 0, 0, 0.04),
+              inset 0 1px 1px 0 rgba(255, 255, 255, 0.8) !important;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+html[data-brillian-theme='liquid-glass'][data-theme='dark'] [data-floating-toolbar],
+html[data-brillian-theme='liquid-glass'][data-theme='dark'] editor-toolbar,
+html[data-brillian-theme='liquid-glass'][data-theme='dark'] editor-toolbar > div,
+html[data-brillian-theme='liquid-glass'][data-theme='dark'] affine-format-bar-widget,
+html[data-brillian-theme='liquid-glass'][data-theme='dark'] affine-slash-menu-widget,
+html[data-brillian-theme='liquid-glass'][data-theme='dark'] .affine-format-bar,
+html[data-brillian-theme='liquid-glass'][data-theme='dark'] .editor-toolbar,
+html[data-brillian-theme='liquid-glass'][data-theme='dark'] [class*='toolbarContainer'],
+html[data-brillian-theme='liquid-glass'][data-theme='dark'] [class*='formatBar'] {
+  background: rgba(30, 30, 32, 0.8) !important;
+  backdrop-filter: blur(40px) saturate(210%) !important;
+  -webkit-backdrop-filter: blur(40px) saturate(210%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.28) !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4) !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45),
+              0 4px 14px rgba(0, 0, 0, 0.2),
+              inset 0 1px 1px 0 rgba(255, 255, 255, 0.15) !important;
+}
+
+/* Format bar internal items & separators */
+html[data-brillian-theme='liquid-glass'] editor-toolbar .divider,
+html[data-brillian-theme='liquid-glass'] .affine-toolbar-widget .divider,
+html[data-brillian-theme='liquid-glass'] affine-format-bar-widget .divider {
+  background-color: var(--affine-glass-border) !important;
+  opacity: 0.6;
+  height: 18px !important;
+  margin: 0 2px !important;
+}
+
+html[data-brillian-theme='liquid-glass'] editor-toolbar editor-icon-button,
+html[data-brillian-theme='liquid-glass'] editor-toolbar editor-menu-button,
+html[data-brillian-theme='liquid-glass'] .ask-ai-button,
+html[data-brillian-theme='liquid-glass'] ask-ai-toolbar-button {
+  border-radius: 9999px !important;
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+html[data-brillian-theme='liquid-glass'] editor-toolbar svg,
+html[data-brillian-theme='liquid-glass'] editor-menu-action svg {
+  color: var(--affine-icon-color, #8e8d91) !important;
+  fill: currentColor !important;
+}
+
+html[data-brillian-theme='liquid-glass'] editor-toolbar editor-icon-button:hover,
+html[data-brillian-theme='liquid-glass'] editor-toolbar editor-menu-button:hover {
+  background: rgba(0, 0, 0, 0.06) !important;
+  backdrop-filter: blur(8px) !important;
+  border-radius: 9999px !important;
+}
+
+html[data-brillian-theme='liquid-glass'][data-theme='dark'] editor-toolbar editor-icon-button:hover,
+html[data-brillian-theme='liquid-glass'][data-theme='dark'] editor-toolbar editor-menu-button:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+
+html[data-brillian-theme='liquid-glass'] .ask-ai-button {
+  padding: 3px 10px !important;
+  background: rgba(11, 87, 208, 0.12) !important;
+  border: 1px solid rgba(11, 87, 208, 0.22) !important;
+  color: #0b57d0 !important;
+  font-weight: 500 !important;
+}
+
+html[data-brillian-theme='liquid-glass'][data-theme='dark'] .ask-ai-button {
+  background: rgba(59, 130, 246, 0.18) !important;
+  border: 1px solid rgba(59, 130, 246, 0.3) !important;
+  color: #60a5fa !important;
+}
+
+html[data-brillian-theme='liquid-glass'] .ask-ai-button:hover {
+  background: rgba(11, 87, 208, 0.22) !important;
+  border-color: rgba(11, 87, 208, 0.4) !important;
+}
+
+/* Apple Spotlight / Quick Search Modal */
+html[data-brillian-theme='liquid-glass'] [data-testid='cmdk-quick-search'],
+html[data-brillian-theme='liquid-glass'] .cmdk-dialog,
+html[data-brillian-theme='liquid-glass'] [cmdk-root] {
+  background: var(--affine-glass-background) !important;
+  backdrop-filter: blur(36px) saturate(200%) !important;
+  -webkit-backdrop-filter: blur(36px) saturate(200%) !important;
+  border: 1px solid var(--affine-glass-border) !important;
+  border-top: 1px solid var(--affine-glass-glow) !important;
+  border-left: 1px solid var(--affine-glass-glow) !important;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45) !important;
+  border-radius: 18px !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+}
+
+html[data-brillian-theme='liquid-glass'] [cmdk-item] {
+  border-radius: 10px !important;
+  margin: 2px 6px !important;
+  transition: all 0.15s ease !important;
+}
+
+/* Apple Curvature for Dropdown & Context Menus */
+html[data-brillian-theme='liquid-glass'] [role='menu'],
+html[data-brillian-theme='liquid-glass'] [role='listbox'],
+html[data-brillian-theme='liquid-glass'] editor-menu-content,
+html[data-brillian-theme='liquid-glass'] editor-menu-content .content-wrapper,
+html[data-brillian-theme='liquid-glass'] [data-radix-popper-content-wrapper] > div,
+html[data-brillian-theme='liquid-glass'] [data-radix-menu-content],
+html[data-brillian-theme='liquid-glass'] [data-radix-dropdown-menu-content],
+html[data-brillian-theme='liquid-glass'] [data-radix-context-menu-content],
+html[data-brillian-theme='liquid-glass'] [data-radix-select-content],
+html[data-brillian-theme='liquid-glass'] [data-radix-popover-content],
+html[data-brillian-theme='liquid-glass'] .affine-menu,
+html[data-brillian-theme='liquid-glass'] .affine-slash-menu,
+html[data-brillian-theme='liquid-glass'] .affine-context-menu,
+html[data-brillian-theme='liquid-glass'] [data-testid='more-menu-popup'],
+html[data-brillian-theme='liquid-glass'] [class*='menuContent'],
+html[data-brillian-theme='liquid-glass'] [class*='contextMenu'] {
+  background: rgba(255, 255, 255, 0.78) !important;
+  backdrop-filter: blur(36px) saturate(200%) !important;
+  -webkit-backdrop-filter: blur(36px) saturate(200%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.7) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.95) !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.18), 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+  border-radius: 16px !important;
+  overflow: hidden !important;
+}
+
+html[data-brillian-theme='liquid-glass'][data-theme='dark'] [role='menu'],
+html[data-brillian-theme='liquid-glass'][data-theme='dark'] [role='listbox'],
+html[data-brillian-theme='liquid-glass'][data-theme='dark'] editor-menu-content,
+html[data-brillian-theme='liquid-glass'][data-theme='dark'] editor-menu-content .content-wrapper,
+html[data-brillian-theme='liquid-glass'][data-theme='dark'] [data-radix-popper-content-wrapper] > div,
+html[data-brillian-theme='liquid-glass'][data-theme='dark'] [data-radix-menu-content],
+html[data-brillian-theme='liquid-glass'][data-theme='dark'] [data-radix-dropdown-menu-content],
+html[data-brillian-theme='liquid-glass'][data-theme='dark'] [data-radix-context-menu-content],
+html[data-brillian-theme='liquid-glass'][data-theme='dark'] [data-radix-select-content],
+html[data-brillian-theme='liquid-glass'][data-theme='dark'] [data-radix-popover-content],
+html[data-brillian-theme='liquid-glass'][data-theme='dark'] .affine-menu,
+html[data-brillian-theme='liquid-glass'][data-theme='dark'] .affine-slash-menu,
+html[data-brillian-theme='liquid-glass'][data-theme='dark'] .affine-context-menu,
+html[data-brillian-theme='liquid-glass'][data-theme='dark'] [data-testid='more-menu-popup'],
+html[data-brillian-theme='liquid-glass'][data-theme='dark'] [class*='menuContent'],
+html[data-brillian-theme='liquid-glass'][data-theme='dark'] [class*='contextMenu'] {
+  background: rgba(30, 30, 32, 0.8) !important;
+  backdrop-filter: blur(36px) saturate(200%) !important;
+  -webkit-backdrop-filter: blur(36px) saturate(200%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.24) !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45) !important;
+  border-radius: 16px !important;
+  overflow: hidden !important;
+}
+
+/* Apple Rounded Buttons & Menu Items */
+html[data-brillian-theme='liquid-glass'] [role='menuitem'],
+html[data-brillian-theme='liquid-glass'] [role='option'],
+html[data-brillian-theme='liquid-glass'] editor-menu-action,
+html[data-brillian-theme='liquid-glass'] editor-icon-button,
+html[data-brillian-theme='liquid-glass'] editor-menu-button,
+html[data-brillian-theme='liquid-glass'] .ask-ai-button,
+html[data-brillian-theme='liquid-glass'] .affine-button {
+  border-radius: 8px !important;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+html[data-brillian-theme='liquid-glass'] editor-icon-button,
+html[data-brillian-theme='liquid-glass'] editor-menu-button,
+html[data-brillian-theme='liquid-glass'] .ask-ai-button {
+  border-radius: 9999px !important;
+}
+
+html[data-brillian-theme='liquid-glass'] [role='menuitem']:hover,
+html[data-brillian-theme='liquid-glass'] [role='option']:hover,
+html[data-brillian-theme='liquid-glass'] editor-menu-action:hover,
+html[data-brillian-theme='liquid-glass'] [data-highlighted],
+html[data-brillian-theme='liquid-glass'] editor-icon-button:hover,
+html[data-brillian-theme='liquid-glass'] editor-menu-button:hover {
+  background: rgba(11, 87, 208, 0.14) !important;
+  backdrop-filter: blur(12px) !important;
+}
+
+html[data-brillian-theme='liquid-glass'] button:hover {
+  filter: brightness(1.08);
+  transition: all 0.2s ease;
+}
+
+html[data-brillian-theme='liquid-glass'] .affine-sidebar-container {
+  background: var(--affine-sidebar-glass) !important;
+  border-radius: 0 !important;
+}
+
+/* Apple Sidebar Box Rounded Corners & macOS Vibrant Blue Active Highlight */
+html[data-brillian-theme='liquid-glass'] [data-testid='app-sidebar'] [data-active='true']:not([class*='workspaceInfoSlider']):not([class*='workspaceInfo']):not([class*='workspaceTitleContainer']):not([class*='workspaceStatus']),
+html[data-brillian-theme='liquid-glass'] nav[data-testid='app-sidebar'] [data-active='true']:not([class*='workspaceInfoSlider']):not([class*='workspaceInfo']):not([class*='workspaceTitleContainer']):not([class*='workspaceStatus']),
+html[data-brillian-theme='liquid-glass'] .affine-sidebar-container [data-active='true']:not([class*='workspaceInfoSlider']):not([class*='workspaceInfo']):not([class*='workspaceTitleContainer']):not([class*='workspaceStatus']),
+html[data-brillian-theme='liquid-glass'] [class*='sidebarSelectItem'].active,
+html[data-brillian-theme='liquid-glass'] [class*='sidebarSelectItem'][data-active='true'],
+html[data-brillian-theme='liquid-glass'] [class*='accountButton'].active,
+html[data-brillian-theme='liquid-glass'] [class*='itemRoot'][data-active='true'],
+html[data-brillian-theme='liquid-glass'] [data-active='true'][class*='itemRoot'] {
+  background: #007aff !important;
+  color: #ffffff !important;
+  border-radius: 8px !important;
+  font-weight: 500 !important;
+  box-shadow: 0 2px 8px rgba(0, 122, 255, 0.35) !important;
+}
+
+/* Ensure ALL text, spans, divs, and icons inside active sidebar items are pure white */
+html[data-brillian-theme='liquid-glass'] [data-testid='app-sidebar'] [data-active='true']:not([class*='workspaceInfoSlider']):not([class*='workspaceInfo']):not([class*='workspaceTitleContainer']):not([class*='workspaceStatus']) *,
+html[data-brillian-theme='liquid-glass'] nav[data-testid='app-sidebar'] [data-active='true']:not([class*='workspaceInfoSlider']):not([class*='workspaceInfo']):not([class*='workspaceTitleContainer']):not([class*='workspaceStatus']) *,
+html[data-brillian-theme='liquid-glass'] .affine-sidebar-container [data-active='true']:not([class*='workspaceInfoSlider']):not([class*='workspaceInfo']):not([class*='workspaceTitleContainer']):not([class*='workspaceStatus']) *,
+html[data-brillian-theme='liquid-glass'] [class*='sidebarSelectItem'].active *,
+html[data-brillian-theme='liquid-glass'] [class*='sidebarSelectItem'][data-active='true'] *,
+html[data-brillian-theme='liquid-glass'] [class*='itemRoot'][data-active='true'] * {
+  color: #ffffff !important;
+  fill: #ffffff !important;
+}
+
+/* Remove blue highlight / background on workspace card & syncing status */
+html[data-brillian-theme='liquid-glass'] [class*='workspaceInfoSlider'],
+html[data-brillian-theme='liquid-glass'] [class*='workspaceInfoSlider'][data-active='true'],
+html[data-brillian-theme='liquid-glass'] [class*='workspaceInfoSlide'],
+html[data-brillian-theme='liquid-glass'] [class*='workspaceInfo'],
+html[data-brillian-theme='liquid-glass'] [class*='workspaceActiveStatus'],
+html[data-brillian-theme='liquid-glass'] [class*='workspaceStatus'],
+html[data-brillian-theme='liquid-glass'] [class*='workspaceTitleContainer'],
+html[data-brillian-theme='liquid-glass'] [data-testid='workspace-card'],
+html[data-brillian-theme='liquid-glass'] [class*='workspace-card_container'] {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+html[data-brillian-theme='liquid-glass'] [class*='workspaceActiveStatus'],
+html[data-brillian-theme='liquid-glass'] [class*='workspaceActiveStatus'] * {
+  color: var(--affine-text-secondary-color, #8e8d91) !important;
+}
+
+html[data-brillian-theme='liquid-glass'] [class*='workspaceActiveStatus'] svg {
+  color: var(--affine-icon-color, #8e8d91) !important;
+  fill: currentColor !important;
+}
+
+html[data-brillian-theme='liquid-glass'] [data-testid='app-sidebar'] [data-collapsible],
+html[data-brillian-theme='liquid-glass'] nav[data-testid='app-sidebar'] [data-collapsible],
+html[data-brillian-theme='liquid-glass'] [class*='itemRoot'],
+html[data-brillian-theme='liquid-glass'] [class*='sidebarSelectItem'] {
+  border-radius: 8px !important;
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+html[data-brillian-theme='liquid-glass'] [data-testid='app-sidebar'] [class*='itemRoot']:hover:not([data-active='true']),
+html[data-brillian-theme='liquid-glass'] nav[data-testid='app-sidebar'] [class*='itemRoot']:hover:not([data-active='true']),
+html[data-brillian-theme='liquid-glass'] [class*='sidebarSelectItem']:hover:not(.active) {
+  background: rgba(0, 0, 0, 0.05) !important;
+  border-radius: 8px !important;
+}
+
+html[data-brillian-theme='liquid-glass'][data-theme='dark'] [data-testid='app-sidebar'] [class*='itemRoot']:hover:not([data-active='true']),
+html[data-brillian-theme='liquid-glass'][data-theme='dark'] nav[data-testid='app-sidebar'] [class*='itemRoot']:hover:not([data-active='true']),
+html[data-brillian-theme='liquid-glass'][data-theme='dark'] [class*='sidebarSelectItem']:hover:not(.active) {
+  background: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Lucas Romero macOS Liquid Glass Refraction, Specular Shine & Tint Layers */
+html[data-brillian-theme='liquid-glass'] [role='dialog'],
+html[data-brillian-theme='liquid-glass'] [data-floating-toolbar],
+html[data-brillian-theme='liquid-glass'] editor-toolbar[data-open],
+html[data-brillian-theme='liquid-glass'] [data-testid='cmdk-quick-search'] {
+  position: relative;
+}
+
+html[data-brillian-theme='liquid-glass'] [role='dialog']::before,
+html[data-brillian-theme='liquid-glass'] [data-floating-toolbar]::before,
+html[data-brillian-theme='liquid-glass'] editor-toolbar[data-open]::before,
+html[data-brillian-theme='liquid-glass'] [data-testid='cmdk-quick-search']::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.28) 0%,
+    rgba(255, 255, 255, 0.08) 35%,
+    rgba(255, 255, 255, 0) 60%,
+    rgba(255, 255, 255, 0.12) 100%
+  );
+  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.4),
+              inset 0 -1px 1px 0 rgba(0, 0, 0, 0.12);
+  z-index: 1;
+}
+
+html[data-brillian-theme='liquid-glass'][data-theme='dark'] [role='dialog']::before,
+html[data-brillian-theme='liquid-glass'][data-theme='dark'] [data-floating-toolbar]::before,
+html[data-brillian-theme='liquid-glass'][data-theme='dark'] editor-toolbar[data-open]::before,
+html[data-brillian-theme='liquid-glass'][data-theme='dark'] [data-testid='cmdk-quick-search']::before {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.14) 0%,
+    rgba(255, 255, 255, 0.04) 35%,
+    rgba(255, 255, 255, 0) 60%,
+    rgba(255, 255, 255, 0.06) 100%
+  );
+  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.22),
+              inset 0 -1px 1px 0 rgba(0, 0, 0, 0.35);
+}
+
+html[data-brillian-theme='liquid-glass'] .liquid-glass-refraction {
+  position: relative;
+  overflow: hidden;
+  filter: url(#liquid-glass-refraction);
+}
+
+
+
