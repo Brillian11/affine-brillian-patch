@@ -1,0 +1,110 @@
+﻿{
+  "meta": {
+    "version": "2026.9.2"
+  },
+  "gateway": {
+    "mode": "local",
+    "port": 18789,
+    "bind": "loopback",
+    "auth": {
+      "mode": "token",
+      "token": "YOUR_OPENCLAW_GATEWAY_TOKEN"
+    },
+    "trustedProxies": [
+      "127.0.0.1",
+      "172.1.0.0/24"
+    ],
+    "controlUi": {
+      "allowedOrigins": [
+        "https://openclaw.yourdomain.com"
+      ]
+    },
+    "remote": {
+      "url": "https://openclaw.yourdomain.com"
+    }
+  },
+  "plugins": {
+    "entries": {
+      "whatsapp": {
+        "enabled": true
+      },
+      "telegram": {
+        "enabled": true
+      },
+      "google": {
+        "enabled": true
+      },
+      "openai": {
+        "enabled": true
+      },
+      "groq": {
+        "enabled": true
+      },
+      "duckduckgo": {
+        "enabled": true
+      },
+      "todoist": {
+        "enabled": true,
+        "config": {
+          "apiToken": "YOUR_TODOIST_API_TOKEN"
+        }
+      },
+      "browser": {
+        "enabled": true
+      },
+      "canvas": {
+        "enabled": true
+      },
+      "file-transfer": {
+        "enabled": true
+      },
+      "device-pair": {
+        "enabled": true
+      }
+    }
+  },
+  "mcp": {
+    "servers": {
+      "affine_workspace": {
+        "url": "https://affine.yourdomain.com/api/workspaces/YOUR_WORKSPACE_ID/mcp",
+        "headers": {
+          "Authorization": "Bearer YOUR_AFFINE_MCP_TOKEN",
+          "Accept": "application/json, text/event-stream"
+        },
+        "clientInfo": {
+          "name": "openclaw",
+          "version": "2026.9.2"
+        },
+        "transport": "streamable-http",
+        "enabled": true
+      },
+      "paperless_ngx": {
+        "url": "http://localhost:3001/mcp",
+        "headers": {
+          "Authorization": "Bearer YOUR_PAPERLESS_TOKEN",
+          "Accept": "application/json, text/event-stream"
+        },
+        "clientInfo": {
+          "name": "openclaw",
+          "version": "2026.9.2"
+        },
+        "transport": "streamable-http",
+        "enabled": true
+      }
+    }
+  },
+  "agents": {
+    "defaults": {
+      "model": {
+        "primary": "google/gemini-2.5-flash",
+        "fallbacks": [
+          "google/gemini-3.1-flash-lite-preview",
+          "groq/meta-llama/llama-4-scout-17b-16e-instruct",
+          "groq/deepseek-r1-distill-llama-70b",
+          "groq/qwen-qwq-32b"
+        ]
+      },
+      "workspace": "/root/.openclaw/workspace"
+    }
+  }
+}

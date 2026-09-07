@@ -1,0 +1,18 @@
+﻿[Unit]
+Description=OpenClaw Gateway Service
+After=network.target docker.service
+Wants=docker.service
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/root/.openclaw
+Environment="NODE_ENV=production"
+Environment="OPENCLAW_SERVICE_REPAIR_POLICY=external"
+ExecStart=/usr/bin/openclaw gateway run --bind loopback
+Restart=always
+RestartSec=5s
+LimitNOFILE=65536
+
+[Install]
+WantedBy=multi-user.target

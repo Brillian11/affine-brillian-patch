@@ -1,0 +1,16 @@
+﻿[Unit]
+Description=Todoist Proxy Server for AFFiNE
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/data/affine
+ExecStart=/usr/bin/node /data/affine/todoist-server.js
+Restart=always
+RestartSec=3s
+Environment="PORT=3002"
+Environment="NODE_ENV=production"
+
+[Install]
+WantedBy=multi-user.target
